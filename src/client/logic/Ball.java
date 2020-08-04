@@ -6,10 +6,27 @@ package client.logic;
  */
 public class Ball {
     
-    private int xi, yi, xf, yf;
+    private int x0, y0;
     
-    public Ball(){
-        
+    public Ball(int xi, int yi){
+        x0 = xi;
+        y0 = yi;
     }
-    
+
+    public int getX0() {
+        return x0;
+    }
+
+    public int getX1() {
+        return x0+32;
+    }
+
+    public int getY0() {
+        return y0;
+    }
+
+    public int getY1() {
+        return y0+32;
+    }
+
 }
