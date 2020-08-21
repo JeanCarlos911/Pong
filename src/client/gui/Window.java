@@ -17,11 +17,8 @@ import javax.swing.JPanel;
 public class Window extends JFrame{
     
     private final int WIDTH = 1360, HEIGHT = 768;
-    private final double SPEED = 0.001;
     private JPanel left,right, lP1, lP2;
     private Game game;
-    
-    private boolean W, S, UP, DOWN;
     
     public Window(Game g){
         game = g;
@@ -37,9 +34,6 @@ public class Window extends JFrame{
         setLayout(null);
         setUndecorated(true);
         setVisible(true);
-        
-        while(true)
-            stepEvent();
     }
     
     private void createJPanels(){
@@ -96,22 +90,6 @@ public class Window extends JFrame{
         lP2.setBounds(game.getPlayer2().getX0(), game.getPlayer2().getY0(), 32, 128);
     }
 
-    private void stepEvent() {
-        if(W && game.getPlayer1().getY0() > 10){
-            game.getPlayer1().sumY0(-SPEED);
-        }
-        if(UP && game.getPlayer2().getY0() > 10){
-            game.getPlayer2().sumY0(-SPEED);
-        }
-        if(S && game.getPlayer1().getY0() < 570){
-            game.getPlayer1().sumY0(SPEED);
-        }
-        if(DOWN && game.getPlayer2().getY0() < 570){
-            game.getPlayer2().sumY0(SPEED);
-        }
-        repaint();
-    }
-
     private void listener() {
         addKeyListener(new KeyListener(){
             @Override
@@ -123,25 +101,25 @@ public class Window extends JFrame{
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyChar() == 'w')
-                    W = true;
+                    game.setW(true);
                 if(e.getKeyChar() == 's')
-                    S = true;
+                    game.setS(true);
                 if(e.getKeyCode() == KeyEvent.VK_UP)
-                    UP = true;
+                    game.setUp(true);
                 if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                    DOWN = true;
+                    game.setDown(true);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.getKeyChar() == 'w')
-                    W = false;
+                    game.setW(false);
                 if(e.getKeyChar() == 's')
-                    S = false;
+                    game.setS(false);
                 if(e.getKeyCode() == KeyEvent.VK_UP)
-                    UP = false;
+                    game.setUp(false);
                 if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                    DOWN = false;
+                    game.setDown(false);
             }
         });
     }

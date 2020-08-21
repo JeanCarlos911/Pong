@@ -6,7 +6,7 @@ package client.logic;
  */
 public class Player {
     
-    private int score;
+    private byte score;
     private double x0, y0;
     
     public Player(int xi, int yi){
@@ -35,7 +35,7 @@ public class Player {
         this.y0 += y0;
     }
     
-    public int getScore() {
+    public byte getScore() {
         return score;
     }
     
