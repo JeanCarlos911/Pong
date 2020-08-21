@@ -24,7 +24,7 @@ public class Game{
         p2 = new Player(568, 250);
         ball = new Ball(600, 250);
         window = new Window(this);
-        start();
+        run();
     }
     
     public Ball getBall(){
@@ -39,27 +39,20 @@ public class Game{
         return p2;
     }
     
-    private void start(){
-        ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
-
-        Runnable task1 = () -> {
-            if(W && p1.getY0() > 10){
-                p1.sumY0(-SPEED);
-            }
-            if(UP && p2.getY0() > 10){
-                p2.sumY0(-SPEED);
-            }
-            if(S && p1.getY0() < 570){
-                p1.sumY0(SPEED);
-            }
-            if(DOWN && p2.getY0() < 570){
-                p2.sumY0(SPEED);
-            }
-            window.repaint();
-        };
-
-        // init Delay = 0, repeat the task every 16 milliseconds
-        ScheduledFuture<?> scheduledFuture = ses.scheduleAtFixedRate(task1, 0, 1, TimeUnit.MILLISECONDS);
+    private void step(){
+        if(W && p1.getY0() > 10){
+            p1.sumY0(-SPEED);
+        }
+        if(UP && p2.getY0() > 10){
+            p2.sumY0(-SPEED);
+        }
+        if(S && p1.getY0() < 570){
+            p1.sumY0(SPEED);
+        }
+        if(DOWN && p2.getY0() < 570){
+            p2.sumY0(SPEED);
+        }
+        window.repaint();
     }
 
     public void setW(boolean b) {
@@ -77,5 +70,20 @@ public class Game{
     public void setDown(boolean b) {
         DOWN = b;
     }
-
+    
+    public void run(){
+        long lastTime = System.nanoTime();
+        final double ns = 1000000000.0 / 1000.0;
+        double delta = 0;
+        while(true){
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1){
+                //the code you want to be executed
+                step();
+                delta--;
+            }
+        } 
+   }
 }
