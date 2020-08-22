@@ -1,10 +1,10 @@
 package client.logic;
 
 import client.gui.Window;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import client.logic.objects.Player1;
+import client.logic.objects.Player2;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  *
@@ -13,67 +13,80 @@ import java.util.concurrent.TimeUnit;
 public class Game{
     
     private Window window;
-    private Player p1, p2;
     private Ball ball;
+    private Player p1, p2;
     
-    private boolean W, S, UP, DOWN;
-    private final double SPEED = 1;
+    private boolean keyW, keyS, keyUp, keyDown;
     
     public Game(){
-        p1 = new Player(32, 250);
-        p2 = new Player(568, 250);
-        ball = new Ball(600, 250);
-        window = new Window(this);
+        window = new Window();
+        window.addKeyListener(new KeyListener(){
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if((int)e.getKeyChar() == 27)
+                    System.exit(0);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyChar() == 'w')
+                    keyW = true;
+                if(e.getKeyChar() == 's')
+                    keyS = true;
+                if(e.getKeyCode() == KeyEvent.VK_UP)
+                    keyUp = true;
+                if(e.getKeyCode() == KeyEvent.VK_DOWN)
+                    keyDown = true;
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyChar() == 'w')
+                    keyW = false;
+                if(e.getKeyChar() == 's')
+                    keyS = false;
+                if(e.getKeyCode() == KeyEvent.VK_UP)
+                    keyUp = false;
+                if(e.getKeyCode() == KeyEvent.VK_DOWN)
+                    keyDown = false;
+            }
+        });
+        
+        p1 = new Player1();
+        window.addPlayer(1, p1);
+        
+        p2 = new Player2();
+        window.addPlayer(0, p2);
+        
+        ball = new Ball();
+        window.add(ball, 1);
+        
         run();
     }
     
-    public Ball getBall(){
-        return ball;
-    }
-    
-    public Player getPlayer1(){
-        return p1;
-    }
-    
-    public Player getPlayer2(){
-        return p2;
-    }
-    
     private void step(){
-        if(W && p1.getY0() > 10){
-            p1.sumY0(-SPEED);
+        if(keyW && p1.getY0() > 0){
+            p1.sumY0(-1);
         }
-        if(UP && p2.getY0() > 10){
-            p2.sumY0(-SPEED);
+        if(keyS && p1.getY0() < 577){
+            p1.sumY0(1);
         }
-        if(S && p1.getY0() < 570){
-            p1.sumY0(SPEED);
+        
+        if(keyUp && p2.getY0() > 0){
+            p2.sumY0(-1);
         }
-        if(DOWN && p2.getY0() < 570){
-            p2.sumY0(SPEED);
+        if(keyDown && p2.getY0() < 577){
+            p2.sumY0(1);
         }
-        window.repaint();
+        
+        p1.repaint();
+        p2.repaint();
+        ball.move();
     }
 
-    public void setW(boolean b) {
-        W = b;
-    }
-
-    public void setS(boolean b) {
-        S = b;
-    }
-
-    public void setUp(boolean b) {
-        UP = b;
-    }
-
-    public void setDown(boolean b) {
-        DOWN = b;
-    }
-    
     public void run(){
         long lastTime = System.nanoTime();
-        final double ns = 1000000000.0 / 1000.0;
+        final double ns = 1000000000.0 / 120.0;
         double delta = 0;
         while(true){
             long now = System.nanoTime();

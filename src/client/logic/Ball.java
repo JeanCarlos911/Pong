@@ -1,32 +1,46 @@
 package client.logic;
 
+import java.awt.Color;
+import java.util.Random;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
  */
-public class Ball {
+public class Ball extends JPanel{
     
-    private int x0, y0;
+    private Random random;
+    private double x0, y0;
+    private double direction, speed;
     
-    public Ball(int xi, int yi){
-        x0 = xi;
-        y0 = yi;
+    public Ball(){
+        random = new Random();
+        restart();
+        
+        setBackground(Color.ORANGE);
+        setSize(32, 32);
+    }
+    
+    public void restart(){
+        x0=664;
+        y0=335;
+        direction = Math.random()* 2 * Math.PI;
+        speed = 4.0;
     }
 
-    public int getX0() {
-        return x0;
+    public void move(){
+        x0 += speed * Math.cos(direction);
+        y0 += speed * Math.sin(direction);
+        
+        if(y0<32 || y0>710){
+            direction *= -1;
+            direction += 2 * Math.PI;
+        }
+        if(x0<32 || x0>1300){
+            direction= (Math.sin(direction)<0)?-1:1 * ((Math.sin(direction)<0)?-(2 * Math.PI):0 + Math.acos(-1 * Math.cos(direction)));
+        }
+        setLocation((int)x0, (int)y0);
     }
-
-    public int getX1() {
-        return x0+32;
-    }
-
-    public int getY0() {
-        return y0;
-    }
-
-    public int getY1() {
-        return y0+32;
-    }
-
+    
 }
