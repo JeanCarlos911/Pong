@@ -85,7 +85,6 @@ public class Game{
         
         p1.repaint();
         p2.repaint();
-        window.repaint();
     }
 
     public void run(){

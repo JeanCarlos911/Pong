@@ -3,6 +3,7 @@ package client.gui;
 import client.logic.Player;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -94,5 +95,5 @@ public class Window extends JFrame{
         right.updateUI();
         right.repaint();
     }
-
+    
 }

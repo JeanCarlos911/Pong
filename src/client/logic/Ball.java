@@ -1,6 +1,7 @@
 package client.logic;
 
 import client.gui.Window;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class Ball extends JPanel{
     private double direction, speed;
     private Player p1, p2;
     private Window window;
+    private AudioClip soundHit, soundPoint;
     
     public Ball(Player p1, Player p2, Window window){
         this.p1 = p1;
@@ -28,6 +30,8 @@ public class Ball extends JPanel{
         
         setBackground(Color.ORANGE);
         setSize(32, 32);
+        soundHit = java.applet.Applet.newAudioClip(getClass().getResource("/sounds/hit.wav"));
+        soundPoint = java.applet.Applet.newAudioClip(getClass().getResource("/sounds/point.wav"));
     }
     
     public void restart(){
@@ -90,23 +94,28 @@ public class Ball extends JPanel{
             direction *= -1;
             direction += 2 * Math.PI;
             hit++;
+            soundHit.play();
         }
         if(x0<32){
             p2.sumScore();
             restart();
             window.repaint(p1.getScore(), p2.getScore());
+            soundPoint.play();
         }
         if(95>=x0 && x0>=63 && p1.getY0()+2<= y0 && p1.getY1()+52>=y0+32){
             direction = Math.random()*Math.PI/2 - Math.PI/4;
+            soundHit.play();
         }
         
         if(x0>1300){
             p1.sumScore();
             restart();
             window.repaint(p1.getScore(), p2.getScore());
+            soundPoint.play();
         }
         if(x0<=1264 && x0>=1232 && p2.getY0()+2<= y0 && p2.getY1()+52>=y0+32){
             direction = Math.random()*Math.PI/2 + 3*Math.PI/4;
+            soundHit.play();
         }
         
         x0 += speed * Math.cos(direction);
