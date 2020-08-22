@@ -67,16 +67,20 @@ public class Game{
     private void step(){
         if(keyW && p1.getY0() > 0){
             p1.sumY0(-1);
+            ball.start();
         }
         if(keyS && p1.getY0() < 577){
             p1.sumY0(1);
+            ball.start();
         }
         
         if(keyUp && p2.getY0() > 0){
             p2.sumY0(-1);
+            ball.start();
         }
         if(keyDown && p2.getY0() < 577){
             p2.sumY0(1);
+            ball.start();
         }
         
         p1.repaint();
