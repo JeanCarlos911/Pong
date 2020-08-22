@@ -46,6 +46,10 @@ public class Player extends JPanel{
         return score;
     }
     
+    public void sumScore() {
+        score++;
+    }
+    
     @Override
     public void repaint(){
         setLocation(x0, y0);

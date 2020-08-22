@@ -85,5 +85,14 @@ public class Window extends JFrame{
         rightScore.setFont(fontPixel);
         right.add(rightScore);
     }
+    
+    public void repaint(int score1, int score2){
+        leftScore.setText(String.format("%d",score1));
+        rightScore.setText(String.format("%d",score2));
+        left.updateUI();
+        left.repaint();
+        right.updateUI();
+        right.repaint();
+    }
 
 }

@@ -1,5 +1,6 @@
 package client.logic;
 
+import client.gui.Window;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -14,8 +15,14 @@ public class Ball extends JPanel{
     private int hit;
     private double x0, y0;
     private double direction, speed;
+    private Player p1, p2;
+    private Window window;
     
-    public Ball(){
+    public Ball(Player p1, Player p2, Window window){
+        this.p1 = p1;
+        this.p2 = p2;
+        this.window = window;
+        
         random = new Random();
         restart();
         
@@ -39,43 +46,43 @@ public class Ball extends JPanel{
             case 2:
                 speed = 2.0;
                 break;
-            case 3:
+            case 4:
                 speed = 3.0;
                 break;
-            case 4:
+            case 7:
                 speed = 4.0;
                 break;
-            case 5:
+            case 11:
                 speed = 5.0;
                 break;
-            case 7:
+            case 16:
                 speed = 6.0;
                 break;
-            case 9:
+            case 22:
                 speed = 8.0;
                 break;
-            case 12:
+            case 29:
                 speed = 9.0;
                 break;
-            case 15:
+            case 37:
                 speed = 10.0;
                 break;
-            case 20:
+            case 46:
                 speed = 11.0;
                 break;
-            case 30:
+            case 56:
                 speed = 12.0;
                 break;
-            case 40:
+            case 67:
                 speed = 13.0;
                 break;
-            case 60:
+            case 79:
                 speed = 14.0;
                 break;
-            case 80:
+            case 94:
                 speed = 14.5;
                 break;
-            case 100:
+            case 108:
                 speed = 15.0;
                 break;
         }
@@ -85,12 +92,21 @@ public class Ball extends JPanel{
             hit++;
         }
         if(x0<32){
-            direction = Math.random()*Math.PI/2 - Math.PI/4;
-            hit++;
+            p2.sumScore();
+            restart();
+            window.repaint(p1.getScore(), p2.getScore());
         }
+        if(95>=x0 && x0>=63 && p1.getY0()+2<= y0 && p1.getY1()+52>=y0+32){
+            direction = Math.random()*Math.PI/2 - Math.PI/4;
+        }
+        
         if(x0>1300){
+            p1.sumScore();
+            restart();
+            window.repaint(p1.getScore(), p2.getScore());
+        }
+        if(x0<=1264 && x0>=1232 && p2.getY0()+2<= y0 && p2.getY1()+52>=y0+32){
             direction = Math.random()*Math.PI/2 + 3*Math.PI/4;
-            hit++;
         }
         
         x0 += speed * Math.cos(direction);

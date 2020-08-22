@@ -58,7 +58,7 @@ public class Game{
         p2 = new Player2();
         window.addPlayer(0, p2);
         
-        ball = new Ball();
+        ball = new Ball(p1, p2, window);
         window.add(ball, 1);
         
         run();
@@ -85,6 +85,7 @@ public class Game{
         
         p1.repaint();
         p2.repaint();
+        window.repaint();
     }
 
     public void run(){
