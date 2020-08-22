@@ -81,20 +81,21 @@ public class Game{
         
         p1.repaint();
         p2.repaint();
-        ball.move();
     }
 
     public void run(){
         long lastTime = System.nanoTime();
-        final double ns = 1000000000.0 / 120.0;
+        final double nsCode = 1000000000.0 / 120.0;
         double delta = 0;
+        
         while(true){
             long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
+            delta += (now - lastTime) / nsCode;
             lastTime = now;
-            while(delta >= 1){
-                //the code you want to be executed
+            
+            while(delta >= 1.0){
                 step();
+                ball.move();
                 delta--;
             }
         } 

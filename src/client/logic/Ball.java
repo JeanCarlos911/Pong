@@ -26,23 +26,22 @@ public class Ball extends JPanel{
         x0=664;
         y0=335;
         direction = Math.random()* 2 * Math.PI;
-        speed = 5.0;
+        speed = 7.0;
     }
 
     public void move(){
-        x0 += speed * Math.cos(direction);
-        y0 += speed * Math.sin(direction);
-        
         if(y0<32 || y0>710){
             direction *= -1;
             direction += 2 * Math.PI;
         }
-        if(x0<32 || x0>1300){
-            if(direction>0 && direction<Math.PI/2)
-                direction = 180 - direction;
-            else
-                direction= (Math.sin(direction)<0)?-1:1 * ((Math.sin(direction)<0)?-(2 * Math.PI):0 + Math.acos(-1 * Math.cos(direction)));
-        }
+        if(x0<32)
+            direction = Math.random()*Math.PI/2 - Math.PI/4;
+        if(x0>1300)
+            direction = Math.random()*Math.PI/2 + 3*Math.PI/4;
+        
+        x0 += speed * Math.cos(direction);
+        y0 += speed * Math.sin(direction);
+        
         setLocation((int)x0, (int)y0);
     }
     

@@ -2,9 +2,11 @@ package client.gui;
 
 import client.logic.Player;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -15,10 +17,12 @@ public class Window extends JFrame{
     
     private final int WIDTH = 1360, HEIGHT = 768;
     private JPanel left, right;
+    private JLabel leftScore, rightScore;
     
     public Window(){
         addJPanels();
         addJButtons();
+        addJLabels();
         drawBackground();
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -63,6 +67,23 @@ public class Window extends JFrame{
             System.exit(0);
         });
         add(close);
+    }
+
+    private void addJLabels() {
+        Font fontPixel = new Font("Agency FB", Font.PLAIN, 64);
+        
+        leftScore = new JLabel("00");
+        leftScore.setForeground(Color.WHITE);
+        leftScore.setFont(fontPixel);
+        leftScore.setSize(64,64);
+        leftScore.setLocation(576,0);
+        left.add(leftScore);
+        
+        rightScore = new JLabel("00");
+        rightScore.setForeground(Color.WHITE);
+        rightScore.setSize(64,64);
+        rightScore.setFont(fontPixel);
+        right.add(rightScore);
     }
 
 }
