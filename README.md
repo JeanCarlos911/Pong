@@ -11,4 +11,4 @@ Classic pong game in java.
 - DOWN : VK_DOWN
 
 ## Gameplay
-<a href="#">link not avaible yet</a>
+<a href="https://youtu.be/Hun0xwpPyqM">Youtube link</a>
