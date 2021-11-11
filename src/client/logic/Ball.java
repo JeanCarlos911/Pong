@@ -1,9 +1,9 @@
 package client.logic;
 
 import client.gui.Window;
-import java.applet.AudioClip;
+import sounds.SClip;
+
 import java.awt.Color;
-import java.util.Random;
 import javax.swing.JPanel;
 
 /**
@@ -11,30 +11,28 @@ import javax.swing.JPanel;
  * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
  */
 public class Ball extends JPanel{
-    
-    private Random random;
+
     private int hit;
     private double x0, y0;
     private double direction, speed;
-    private Player p1, p2;
-    private Window window;
-    private AudioClip soundHit, soundPoint;
+    private final Player p1, p2;
+    private final Window window;
+    private final SClip soundHit, soundPoint;
     
-    public Ball(Player p1, Player p2, Window window){
+    public Ball(Player p1, Player p2, Window window) {
         this.p1 = p1;
         this.p2 = p2;
         this.window = window;
-        
-        random = new Random();
+
         restart();
         
         setBackground(Color.ORANGE);
         setSize(32, 32);
-        soundHit = java.applet.Applet.newAudioClip(getClass().getResource("/sounds/hit.wav"));
-        soundPoint = java.applet.Applet.newAudioClip(getClass().getResource("/sounds/point.wav"));
+        soundHit = new SClip("sounds/hit.wav");
+        soundPoint = new SClip("sounds/point.wav");
     }
     
-    public void restart(){
+    public void restart() {
         x0=664;
         y0=335;
         direction = Math.random()* 2 * Math.PI;
@@ -42,53 +40,23 @@ public class Ball extends JPanel{
         speed = 0.0;
     }
 
-    public void move(){
-        switch(hit){
-            case 1:
-                speed = 1.0;
-                break;
-            case 2:
-                speed = 2.0;
-                break;
-            case 4:
-                speed = 3.0;
-                break;
-            case 7:
-                speed = 4.0;
-                break;
-            case 11:
-                speed = 5.0;
-                break;
-            case 16:
-                speed = 6.0;
-                break;
-            case 22:
-                speed = 8.0;
-                break;
-            case 29:
-                speed = 9.0;
-                break;
-            case 37:
-                speed = 10.0;
-                break;
-            case 46:
-                speed = 11.0;
-                break;
-            case 56:
-                speed = 12.0;
-                break;
-            case 67:
-                speed = 13.0;
-                break;
-            case 79:
-                speed = 14.0;
-                break;
-            case 94:
-                speed = 14.5;
-                break;
-            case 108:
-                speed = 15.0;
-                break;
+    public void move() {
+        switch (hit) {
+            case 1 -> speed = 1.5;
+            case 2 -> speed = 2.5;
+            case 4 -> speed = 3.5;
+            case 7 -> speed = 4.5;
+            case 11 -> speed = 5.5;
+            case 16 -> speed = 6.5;
+            case 22 -> speed = 8.0;
+            case 29 -> speed = 9.0;
+            case 37 -> speed = 10.0;
+            case 46 -> speed = 11.0;
+            case 56 -> speed = 12.0;
+            case 67 -> speed = 13.0;
+            case 79 -> speed = 14.0;
+            case 94 -> speed = 14.5;
+            case 108 -> speed = 15.0;
         }
         if(y0<32 || y0>710){
             direction *= -1;
@@ -124,7 +92,7 @@ public class Ball extends JPanel{
         setLocation((int)x0, (int)y0);
     }
     
-    public void start(){
+    public void start() {
         if(hit==0)
             hit++;
     }

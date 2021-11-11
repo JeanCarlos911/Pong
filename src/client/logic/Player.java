@@ -7,10 +7,12 @@ import javax.swing.JPanel;
  *
  * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
  */
-public class Player extends JPanel{
+public abstract class Player extends JPanel{
     
     private byte score;
-    private int x0, y0, speed;
+    private final int x0;
+    private int y0;
+    private final int speed;
     
     public Player(int xi, int yi, Color color){
         x0 = xi;
@@ -22,20 +24,12 @@ public class Player extends JPanel{
         setBounds(x0, y0, 32, 128);
     }
 
-    public int getX0() {
-        return (int)x0;
-    }
-
-    public int getX1() {
-        return (int)x0+32;
-    }
-
     public int getY0() {
-        return (int)y0;
+        return y0;
     }
 
     public int getY1() {
-        return (int)y0+128;
+        return y0+128;
     }
 
     public void sumY0(int y0) {

@@ -3,7 +3,6 @@ package client.gui;
 import client.logic.Player;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +15,8 @@ import javax.swing.JPanel;
  */
 public class Window extends JFrame{
     
-    private final int WIDTH = 1360, HEIGHT = 768;
+    private final int WIDTH = 1360;
+    private final int HEIGHT = 768;
     private JPanel left, right;
     private JLabel leftScore, rightScore;
     
@@ -64,9 +64,7 @@ public class Window extends JFrame{
         close.setBounds(WIDTH-50, 0, 50, 32);
         close.setBackground(Color.RED);
         close.setFocusable(false);
-        close.addActionListener((ActionEvent e) -> {
-            System.exit(0);
-        });
+        close.addActionListener((ActionEvent e) -> System.exit(0));
         add(close);
     }
 

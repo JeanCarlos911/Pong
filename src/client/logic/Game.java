@@ -11,15 +11,14 @@ import java.awt.event.KeyListener;
  * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
  */
 public class Game{
-    
-    private Window window;
-    private Ball ball;
-    private Player p1, p2;
+
+    private final Ball ball;
+    private final Player p1, p2;
     
     private boolean keyW, keyS, keyUp, keyDown;
     
     public Game(){
-        window = new Window();
+        Window window = new Window();
         window.addKeyListener(new KeyListener(){
             @Override
             public void keyTyped(KeyEvent e) {
@@ -51,7 +50,8 @@ public class Game{
                     keyDown = false;
             }
         });
-        
+
+        //sustitucion de liskov
         p1 = new Player1();
         window.addPlayer(1, p1);
         
