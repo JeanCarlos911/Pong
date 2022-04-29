@@ -71,16 +71,17 @@ public class Window extends JFrame{
     private void addJLabels() {
         Font fontPixel = new Font("Agency FB", Font.PLAIN, 64);
         
-        leftScore = new JLabel("00");
+        leftScore = new JLabel("0");
         leftScore.setForeground(Color.WHITE);
         leftScore.setFont(fontPixel);
-        leftScore.setSize(64,64);
-        leftScore.setLocation(576,0);
+        leftScore.setSize(164,64);
+        leftScore.setLocation(476,0);
+        leftScore.setHorizontalTextPosition(JLabel.RIGHT);
         left.add(leftScore);
         
-        rightScore = new JLabel("00");
+        rightScore = new JLabel("0");
         rightScore.setForeground(Color.WHITE);
-        rightScore.setSize(64,64);
+        rightScore.setSize(164,64);
         rightScore.setFont(fontPixel);
         right.add(rightScore);
     }
