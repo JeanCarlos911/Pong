@@ -1,6 +1,6 @@
 # P0NG
 Classic pong game in java.
-![](demo.png)
+<img  src="demo.png" />
 
 ## Controlls
 ### Player 1 (red): 
