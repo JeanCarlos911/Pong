@@ -1,23 +1,19 @@
-package client.logic;
+package controller;
 
-import client.gui.Window;
-import client.logic.objects.Player1;
-import client.logic.objects.Player2;
+import model.Ball;
+import model.Player;
+import model.Player1;
+import model.Player2;
+import view.Window;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-/**
- *
- * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
- */
-public class Game{
-
+public class Controller {
     private final Ball ball;
     private final Player p1, p2;
-    
     private boolean keyW, keyS, keyUp, keyDown;
     
-    public Game(){
+    public Controller(){
         Window window = new Window();
         window.addKeyListener(new KeyListener(){
             @Override
@@ -51,7 +47,7 @@ public class Game{
             }
         });
 
-        //sustitucion de liskov
+        // sustitución de liskov
         p1 = new Player1();
         window.addPlayer(1, p1);
         
@@ -65,24 +61,28 @@ public class Game{
     }
     
     private void step(){
+        // activa movimiento de la bola
+        if(keyDown || keyS || keyUp || keyW) {
+            ball.start();
+        }
+
+        // movimiento del jugador de la izquierda
         if(keyW && p1.getY0() > 0){
             p1.sumY0(-1);
-            ball.start();
         }
         if(keyS && p1.getY0() < 577){
             p1.sumY0(1);
-            ball.start();
         }
-        
+
+        //movimiento del jugador de la derecha
         if(keyUp && p2.getY0() > 0){
             p2.sumY0(-1);
-            ball.start();
         }
         if(keyDown && p2.getY0() < 577){
             p2.sumY0(1);
-            ball.start();
         }
-        
+
+        // visual change
         p1.repaint();
         p2.repaint();
     }

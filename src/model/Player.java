@@ -1,12 +1,8 @@
-package client.logic;
+package model;
 
 import java.awt.Color;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
- */
 public abstract class Player extends JPanel{
     
     private byte score;

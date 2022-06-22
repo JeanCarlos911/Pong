@@ -1,11 +1,10 @@
-package sounds;
+package sound;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
 public class SClip {
-
     private Clip audioClip;
     private AudioInputStream audioStream;
 

@@ -1,6 +1,6 @@
-package client.logic.objects;
+package model;
 
-import client.logic.Player;
+import model.Player;
 import java.awt.Color;
 
 /**

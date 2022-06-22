@@ -1,6 +1,6 @@
-package client.gui;
+package view;
 
-import client.logic.Player;
+import model.Player;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,12 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Jean Carlos Santoya Cabrera jeancarlosodi@gmail.com
- */
 public class Window extends JFrame{
-    
     private final int WIDTH = 1360;
     private final int HEIGHT = 768;
     private JPanel left, right;
