@@ -21,7 +21,8 @@ public class Window extends JFrame{
         addJLabels();
         drawBackground();
         
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null);
         setLayout(null);
         setUndecorated(true);
         setVisible(true);

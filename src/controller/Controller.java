@@ -15,10 +15,10 @@ public class Controller {
     
     public Controller(){
         Window window = new Window();
-        window.addKeyListener(new KeyListener(){
+        window.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if((int)e.getKeyChar() == 27)
+                if(e.getKeyChar() == KeyEvent.VK_ESCAPE)
                     System.exit(0);
             }
 
